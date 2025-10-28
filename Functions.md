@@ -8,7 +8,7 @@
 ### -> Avoids name conflicts and unnecessary function names
 ### -> Makes the code easy to understand and making user friendly as the same meaningful function name is used for different types of inputs.
 
-```c
+```c++
 #include <iostream>
 using namespace std;
 
@@ -36,7 +36,7 @@ int main() {
 
 ## Different Number of Parameters
 ### We can overload a function by changing the number of parameters that it accepts
-```c
+```c++
 #include <iostream>
 using namespace std;
 
@@ -58,10 +58,10 @@ int multiply(int a, int b, int c) {
     return a * b * c;
 }
 ```
-# Different Types of Parameters
+## Different Types of Parameters
 ### We can also change the data type of the parameters while keeping the same function name in function overloading.
 
-```c
+```c++
 #include <iostream>
 using namespace std;
 
@@ -84,9 +84,9 @@ double add (double a, double b) {
     return a + b;
 }
 ```
-# Different Number and Types of Parameters
+## Different Number and Types of Parameters
 ### Functions can also be overloaded by changing both the number and types of parameters.
-```c
+```c++
 #include<iostream>
 using namespace std;
 
@@ -108,11 +108,11 @@ double add(double a, int b, int c) {
     return a + (double)b + (double)c;
 }
 ```
-# Functions that Cannot be Overloaded
+## Functions that Cannot be Overloaded
 ### -> Functions with same parameter but different passing method (i.e. passed by value and passed by reference).
 ### -> Member function declarations with different access specifier but same name and same parameter-type-list cannotbe overloaded.
 ### -> Functions with different return type can not be overloaded
-```c
+```c++
 #include <iostream>
 using namespace std;
 
@@ -138,7 +138,7 @@ int main() {
 # Default Arguments in C++
 ### A default argument is a value provided for a parameter in a function declaration that is automatically assigned by the compiler if no value is provided for those parameters in function.
 ### -> Default arguments must be present on the right side only. Once a default argument is provided, all the arguments to its right must also be defaults.
-```c
+```c++
 #include <iostream>
 using namespace std;
 
@@ -160,7 +160,7 @@ int main()
 ### There are some important rules and best practices to keep in mind when using default arguments in C++:
 ## 1. Default Values Should be Specified in Function Declarations
 ### The default values for parameters should be specified in the function declaration (or prototype). If a function is declared and defined separately, the default values must be in the declaration, not in definition.
-```c
+```c++
 // Declaration with default argument
 void func(int x = 10);
 
@@ -172,7 +172,7 @@ void func(int x)
 ```
 ## 2. Default Arguments Cannot Be Modified
 ### Once default arguments are defined in the declaration, they cannot be modified in the function definition. If you try to change the default value in the definition, it will result in a compilation error.
-```c
+```c++
 // Declaration
 void f(int a = 10);
 
@@ -184,7 +184,7 @@ void f(int a = 222)
 ```
 ## 3. Default Arguments Must Be Provided from Right to Left
 ### In a function with multiple parameters, default values must be provided from the rightmost parameter to the left. It means that if a parameter has a default argument, all parameters to its right must also have default values.
-```c
+```c++
 // Valid
 void func(int x, int y = 20);
 
@@ -192,7 +192,7 @@ void func(int x, int y = 20);
 void func(int x = 10, int y);
 ```
 ### Example :
-```c
+```c++
 #include <iostream>
 using namespace std;
 
@@ -211,3 +211,26 @@ int main()
 }
 ```
 
+# Inline Functions in C++
+### An inline function is a function in C++ whose code is expanded at the point of call at compile time. It reduces function-call overhead.
+### -> The inline keyword suggests replacing a function call with its code to reduce overhead.
+### -> Inlining is a request, not guaranteed by the compiler.
+### -> The compiler may ignore inlining if the function contains loops, recursion, static variables, switch/goto, or a non-void function without a return statement..
+```c++
+#include <iostream>
+using namespace std;
+
+inline int getSum(int a, int b)
+{
+    return a + b;
+}
+
+int main()
+{
+    int num1 = 5, num2 = 10;
+    int result = getSum(num1, num2);
+    cout << "Sum : " << result << endl;
+
+    return 0;
+}
+```
