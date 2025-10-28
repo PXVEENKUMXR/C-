@@ -234,3 +234,73 @@ int main()
     return 0;
 }
 ```
+# Differences Between Macros and Inline Functions in C++
+
+## 1. Definition and Type
+
+| Feature | Macros | Inline Functions |
+|----------|---------|------------------|
+| **Definition** | Defined using the preprocessor directive `#define` | Defined using the `inline` keyword within C++ functions |
+| **Type** | Text substitution done by the preprocessor | Actual functions handled by the compiler |
+
+---
+
+## 2. How They Work
+
+| Feature | Macros | Inline Functions |
+|----------|---------|------------------|
+| **Mechanism** | The preprocessor replaces the macro name with its body before compilation (**no type checking**). | The compiler replaces the function call with the function’s body at compile time (**with full type checking**). |
+| **Example** | `#define SQUARE(x) ((x) * (x))` | `inline int square(int x) { return x * x; }` |
+| **Code Effect** | A literal substitution of text. | An actual function call that may be replaced (inlined) by the compiler. |
+
+---
+
+## 3. Type Safety
+
+| Feature | Macros | Inline Functions |
+|----------|---------|------------------|
+| **Type Checking** | No — macro parameters are not type-checked. | Yes — compiler enforces type safety. |
+| **Example Problem** | `SQUARE(a++)` → expands to `(a++ * a++)`, causing unexpected behavior. | `square(a++)` → increments `a` only once, as in a normal function. |
+
+---
+
+## 4. Debugging and Errors
+
+| Feature | Macros | Inline Functions |
+|----------|---------|------------------|
+| **Debugging** | Harder to debug — errors appear in the expanded code after preprocessing. | Easier to debug — behaves like normal functions. |
+| **Error Reporting** | Compiler does not report errors in macro expansions clearly. | Compiler gives proper function-level errors. |
+
+---
+
+### Example : 
+```c++
+#include <iostream>
+using namespace std;
+
+#define SQUARE(x) ((x) * (x))
+
+inline int square(int x) {
+    return x * x;
+}
+
+int main()
+{
+    int a = 5;
+
+    cout << "Macro SQUARE(a): " << SQUARE(a) << endl;
+    cout << "Inline square(a): " << square(a) << endl;
+
+    cout << "\nNow using a++ as argument:\n";
+
+    a = 5;
+    cout << "Macro SQUARE(a++): " << SQUARE(a++) << endl;
+    cout << "Value of a after macro: " << a << endl;
+
+    a = 5;
+    cout << "Inline square(a++): " << square(a++) << endl;
+    cout << "Value of a after inline: " << a << endl;
+
+    return 0;
+}
+```
