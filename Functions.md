@@ -134,3 +134,80 @@ int main() {
     return 0;
 }
 ```
+
+# Default Arguments in C++
+### A default argument is a value provided for a parameter in a function declaration that is automatically assigned by the compiler if no value is provided for those parameters in function.
+### -> Default arguments must be present on the right side only. Once a default argument is provided, all the arguments to its right must also be defaults.
+```c
+#include <iostream>
+using namespace std;
+
+void f(int a = 10)
+{
+    cout << a << endl;
+}
+
+int main()
+{
+    f();
+
+    f(221);
+
+    return 0;
+}
+```
+# Rules to Follow
+### There are some important rules and best practices to keep in mind when using default arguments in C++:
+## 1. Default Values Should be Specified in Function Declarations
+### The default values for parameters should be specified in the function declaration (or prototype). If a function is declared and defined separately, the default values must be in the declaration, not in definition.
+```c
+// Declaration with default argument
+void func(int x = 10);
+
+// Definition without default argument
+void func(int x)
+{
+    cout << "Value: " << x << endl;
+}
+```
+## 2. Default Arguments Cannot Be Modified
+### Once default arguments are defined in the declaration, they cannot be modified in the function definition. If you try to change the default value in the definition, it will result in a compilation error.
+```c
+// Declaration
+void f(int a = 10);
+
+// This definintion will throw and error
+void f(int a = 222)
+{
+    // statements
+}
+```
+## 3. Default Arguments Must Be Provided from Right to Left
+### In a function with multiple parameters, default values must be provided from the rightmost parameter to the left. It means that if a parameter has a default argument, all parameters to its right must also have default values.
+```c
+// Valid
+void func(int x, int y = 20);
+
+// Invalid, as `y` does not have a default value
+void func(int x = 10, int y);
+```
+### Example :
+```c
+#include <iostream>
+using namespace std;
+
+// Function with default height 'h' argument
+double calcArea(double l, double h = 10.0)
+{
+    return l * h;
+}
+
+int main()
+{
+    cout << "Area 1:  " << calcArea(5) << endl;
+
+    cout << "Area 2: " << calcArea(5, 9);
+    return 0;
+}
+```
+
